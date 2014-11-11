@@ -224,11 +224,6 @@ public class ResourceLoader {
                       || !org.sikuli.script.Sikulix.isOnClasspath(libsJarName)) {
                 libsURL = null;
               }
-              tessURL = new URL(jarURL.toString().replace(jarName, tessJarName));
-              if (!Sikulix.addToClasspath(tessURL.getPath())
-                      || !org.sikuli.script.Sikulix.isOnClasspath(tessJarName)) {
-                tessURL = null;
-              }
             } catch (Exception ex) {
               log(-1, "\n%s", ex);
             }
@@ -822,6 +817,8 @@ public class ResourceLoader {
       } else {
         lib = mappedlib;
         log(lvl, "Linux: %s \nnot bundled - trying to load from system paths", lib);
+//TODO try to find it on LD_LIBRARY_PATH
+				Sikulix.terminate(109);
       }
     } else {
       log(lvl + 1, "Found: " + libname + " at " + lib);
